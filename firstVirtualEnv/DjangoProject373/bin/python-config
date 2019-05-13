@@ -1,4 +1,4 @@
-#!/Users/devuser/git/moreDjangoinVirtualEnv/firstVirtualEnv/Django_project_373/bin/python
+#!/Users/devuser/git/moreDjangoinVirtualEnv/firstVirtualEnv/DjangoProject373/bin/python
 
 import sys
 import getopt
