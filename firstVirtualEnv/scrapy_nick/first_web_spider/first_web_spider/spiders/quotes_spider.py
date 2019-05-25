@@ -1,6 +1,7 @@
 import scrapy
 from ..items import FirstWebSpiderItem
 
+
 class QuotesSpider(scrapy.Spider):
     name = 'quotes'
     start_urls = [
