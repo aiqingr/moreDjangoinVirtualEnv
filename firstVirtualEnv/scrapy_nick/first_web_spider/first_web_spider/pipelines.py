@@ -5,7 +5,8 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
-import sqlite3
+# import sqlite3
+import mysql.connector
 
 
 class FirstWebSpiderPipeline(object):
@@ -15,7 +16,14 @@ class FirstWebSpiderPipeline(object):
         self.create_table()
 
     def create_connection(self):
-        self.conn = sqlite3.connect("myquotes.db")
+        # self.conn = sqlite3.connect("myquotes.db")
+        # self.curr = self.conn.cursor()
+        self.conn = mysql.connector.connect(
+            host='localhost',
+            user='root',
+            passwd='63398049nty',
+            database='myquotes'
+        )
         self.curr = self.conn.cursor()
 
     def create_table(self):
@@ -31,7 +39,7 @@ class FirstWebSpiderPipeline(object):
         return item
 
     def store_db(self, item):
-        self.curr.execute("""insert into quotes_tb values (?, ?, ?)""", (
+        self.curr.execute("""insert into quotes_tb values (%s, %s, %s)""", (
             item['title'][0],
             item['author'][0],
             item['tag'][0]
