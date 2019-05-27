@@ -1,15 +1,25 @@
 import scrapy
+from scrapy.http import FormRequest
+from scrapy.utils.response import open_in_browser
 from ..items import FirstWebSpiderItem
 
 
 class QuotesSpider(scrapy.Spider):
     name = 'quotes'
     start_urls = [
-        'http://quotes.toscrape.com'
+        'http://quotes.toscrape.com/login'
     ]
 
     def parse(self, response):
+        token = response.css('form input::attr(value)').extract_first()
+        return FormRequest.from_response(response, formdata={
+            'crsf_token': token,
+            'username': '123123@123.com',
+            'password': '123123'
+        }, callback = self.start_scraping)
 
+    def start_scraping(self, response):
+        open_in_browser(response)
         items = FirstWebSpiderItem()
 
         all_div_quotes = response.css('div.quote')
@@ -25,8 +35,3 @@ class QuotesSpider(scrapy.Spider):
             items['tag'] = tag
 
             yield items
-
-        next_page = response.css('li.next a::attr(href)').get()
-
-        if next_page is not None:
-            yield response.follow(next_page, callback = self.parse)
