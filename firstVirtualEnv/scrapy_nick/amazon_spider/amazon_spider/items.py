@@ -15,4 +15,3 @@ class AmazonSpiderItem(scrapy.Item):
     product_imagelink = scrapy.Field()
     product_review = scrapy.Field()
     product_rating = scrapy.Field()
-    pass
