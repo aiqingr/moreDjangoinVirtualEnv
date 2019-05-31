@@ -39,6 +39,12 @@ class FirstWebSpiderPipeline(object):
         return item
 
     def store_db(self, item):
+        if len(item['tag']) == 0:
+            item['tag'] = ['Nothing displayed']
+        # for singleItem in [item['title'], item['author'], item['tag']]:
+        #     if len(singleItem) == 0:
+        #         singleItem = ['Nothing displayed on the webside']
+
         self.curr.execute("""insert into quotes_tb values (%s, %s, %s)""", (
             item['title'][0],
             item['author'][0],
