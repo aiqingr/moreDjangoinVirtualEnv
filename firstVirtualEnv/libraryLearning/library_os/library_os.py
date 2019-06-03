@@ -1,6 +1,7 @@
 import os
+# from datetime import datetime
 
-print(os.getcwd())
+# print(os.getcwd())
 
 # change your dir
 # os.chdir('/Users/devuser/git/moreDjangoinVirtualEnv')
@@ -16,5 +17,19 @@ print(os.getcwd())
 # rename a file
 # os.rename('OS_Demo_1', 'OS_Demo_1_new')
 
-print(os.stat('testing.txt'))
+# m_time = os.stat('testing.txt').st_mtime
+# print(datetime.fromtimestamp(m_time))
+
+# for dirpath, dirnames, filenames in os.walk(os.getcwd()):
+#     print('Current Path: ', dirpath)
+#     print('Directories: ', dirnames)
+#     print('Files: ', filenames)
+#     print()
+#
+# file_path = os.environ.get('HOME')
+# new_path = os.path.join(file_path, 'testing.txt')
+# print(new_path)
+
+print(os.path.splitext('/tem/test'))
+
 print(os.listdir())
